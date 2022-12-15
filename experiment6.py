@@ -71,6 +71,9 @@ def train_classifier(model, max_epoch = 50):
         model.cuda()
     train_dataloader, test_dataloader = get_dataloader()
 
+    for param in model.parameters():
+        param.require_grad = False
+
     classifier = Linear(64, 10).cuda()
     criterion = CrossEntropyLoss()
     optimizer = torch.optim.Adam(classifier.parameters(), lr=0.001)
